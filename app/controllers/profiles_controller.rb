@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
     elsif user_signed_in? # routes /profile
       @profile = current_user.profile
     else #guest
-      @profile = User.new.profile
+      @profile = Profile.new
     end
   end
 
