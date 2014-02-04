@@ -1,4 +1,7 @@
 Rails.application.configure do
+  # use environ variables, not secrets.yml, for production
+  config.secret_key_base = ENV['SECRET_KEY_BASE']
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
