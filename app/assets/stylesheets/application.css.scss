@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+
+#versioning > .verbtns {
+  margin: 0px;
+  padding: 0.3rem 0.5rem;
+}
+
+#versioning {
+  background-color: rgb(67, 172, 106);
+  text-align: center;
+  width: 15rem;
+  margin: 0 auto;
+}
