@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :get_profile, only: [:show, :edit, :update, :destroy, :answer]
 
   def index
