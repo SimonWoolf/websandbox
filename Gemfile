@@ -20,7 +20,7 @@ group :production do
 end
 
 gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
-gem 'unicorn' # use to make websockets work
+gem 'thin' # use to make websockets work
 gem 'websocket-rails'
 gem 'haml-rails'
 gem 'devise'
