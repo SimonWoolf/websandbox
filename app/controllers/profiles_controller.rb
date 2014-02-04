@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :get_profile, only: [:show, :edit, :update, :destroy, :answer]
+  before_action :get_profile, only: [:show, :edit, :update, :destroy]
 
   def index
     @profiles = Profile.all
@@ -32,7 +32,13 @@ class ProfilesController < ApplicationController
 
   private
   def get_profile
-    @profile = profile.find(params[:id])
+    if params[:id] # route /users/:user_id/profile
+      @profile = User.find(params[:user_id]).profile
+    elsif user_signed_in? # routes /profile
+      @profile = current_user.profile
+    else #guest
+      @profile = User.new.profile
+    end
   end
 
   def profile_params
