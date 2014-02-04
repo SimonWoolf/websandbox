@@ -20,7 +20,7 @@ group :production do
 end
 
 gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
-gem 'thin' # use thin t'make websockets work
+gem 'unicorn' # use to make websockets work
 gem 'websocket-rails'
 gem 'haml-rails'
 gem 'devise'
@@ -63,9 +63,6 @@ gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
