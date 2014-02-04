@@ -16,12 +16,13 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @profile = Profile.new(profile_params)
+    @profile = Profile.new(html: "<p>Here is some html!</p>")
     @profile.save
     redirect_to profile_path(@profile)
   end
 
   def update
+    @profile.update(params[:profile].permit(:html))
     redirect_to profile_path(@profile)
   end
 
@@ -41,7 +42,4 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def profile_params
-    params.require(:profile).permit(:parameters_of_profile_go_here)
-  end
 end
