@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
-  before_action :get_profile, only: [:show, :edit, :update, :destroy]
+  helper :versions
+
+  before_action :get_profile, only: [:show, :edit, :create, :update, :destroy]
 
   def index
     @profiles = Profile.all
@@ -16,7 +18,6 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @profile = Profile.new(html: "<p>Here is some html!</p>")
     @profile.save
     redirect_to profile_path(@profile)
   end
@@ -36,10 +37,14 @@ class ProfilesController < ApplicationController
     if params[:id] # route /users/:user_id/profile
       @profile = User.find(params[:user_id]).profile
     elsif user_signed_in? # routes /profile
-      @profile = current_user.profile
+      @profile = current_user.profile || (current_user.profile = new_profile)
     else #guest
-      @profile = Profile.new
+      @profile = new_profile
     end
+  end
+
+  def new_profile
+    Profile.new(html: '<p>Here is an editable html element</p>')
   end
 
 end
