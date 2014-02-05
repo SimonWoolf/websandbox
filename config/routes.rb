@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resource :profile
 
-  post "profile/versions/:id" => "versions#previous", as: "previous_version"
+  post "profile/versions/:id" => "versions#revert", as: "revert_version"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

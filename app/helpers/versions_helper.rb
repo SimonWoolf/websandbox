@@ -1,7 +1,7 @@
 module VersionsHelper
-  def linkprevious
+  def linkrevert
     if @profile.versions.any? && !@profile.versions.last.object.nil?
-      link_to 'Previous', previous_version_path(@profile.versions(true).last), method: :post, html: {class: "success button verbtns"}
+      link_to 'Revert to previous version', revert_version_path(@profile.versions(true).last), method: :post, class: "button verbtns"
     else
       'Previous'
     end

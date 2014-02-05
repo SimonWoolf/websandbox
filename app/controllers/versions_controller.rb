@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-  def previous
+  def revert
     @version = PaperTrail::Version.find(params[:id])
     @version.reify.save!
     redirect_to :back
