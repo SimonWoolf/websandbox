@@ -53,11 +53,17 @@ class ProfilesController < ApplicationController
   end
 
   def authenticate_user!
-    if (params[:user_id] && User.find(params[:user_id]) == current_user) || !params[:user_id]
+    if editing_your_own_page?
       super
     elsif params[:user_id]
       flash[:error] = "Can only edit your own or your friends' pages"
       redirect_to user_profile_path(params[:user_id])
     end
+  end
+
+  def editing_your_own_page?
+    (params[:user_id] &&
+      User.find(params[:user_id]) == current_user) ||
+      !params[:user_id]
   end
 end
