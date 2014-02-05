@@ -1,0 +1,18 @@
+.medium-8.small-centered.columns
+  %table{width: '100%'}
+    %thead
+      %tr
+        %th Time
+        %th Edited by
+        %th Content
+    %tbody
+      - @versions.each do |version|
+        %tr.tablerow
+          %td= version.created_at
+          %td= version.whodunnit
+          - if version.event == "create" 
+            %td
+              %i profile created
+          - else
+            %td= truncate(version.reify.html, length: 50)
+            %td= linkrevert('Revert to this version', version)

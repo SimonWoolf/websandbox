@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   helper :versions
 
-  before_action :get_profile, only: [:show, :edit, :create, :update, :destroy]
+  before_action :get_profile, only: [:show, :edit, :create, :update, :destroy, :history]
 
   def index
     @profiles = Profile.all
@@ -30,6 +30,10 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     redirect_to '/'
+  end
+
+  def history
+    @versions = @profile.versions
   end
 
   private

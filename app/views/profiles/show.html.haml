@@ -1,7 +1,7 @@
 #versioning
-  = linkrevert
+  = linkrevert('Revert to previous version', @profile.versions(true).last)
   %a.alert.button.verbtns Save
   -# needs to do an ajax PATCH to /profile with the html in div-editable
-  %a.success.button.verbtns Version history
+  = link_to 'Version history', versions_profile_path, class: "success button verbtns"
 
 = @profile.html.html_safe

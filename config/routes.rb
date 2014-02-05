@@ -2,12 +2,16 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:show] do
-    resource :profile
+    resource :profile, only: [:show] do
+      get "versions" => :history, as: 'versions'
+      post "versions/:id" => "versions#revert", as: "revert_version"
+    end
   end
 
-  resource :profile
-
-  post "profile/versions/:id" => "versions#revert", as: "revert_version"
+  resource :profile do
+    get "versions" => :history, as: 'versions'
+    post "versions/:id" => "versions#revert", as: "revert_version"
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

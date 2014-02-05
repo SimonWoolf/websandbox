@@ -25,7 +25,7 @@ describe 'Versioning', versioning: true do
     @user.profile.update(html: "<p>updated</p>") #TODO: replace with capybara interaction once nicky's changes merged
     @user.profile.update(html: "<p>again</p>") #TODO: replace with capybara interaction once nicky's changes merged
     click_link 'Version history'
-    click_link 'Revert to this version'
+    page.all('.tablerow')[2].click_link('Revert to this version')
     expect(page).to have_content "factorygirl"
   end
 end
