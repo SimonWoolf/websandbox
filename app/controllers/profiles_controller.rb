@@ -62,8 +62,8 @@ class ProfilesController < ApplicationController
   end
 
   def editing_your_own_page?
-    (params[:user_id] &&
+    (params[:user_id] && # routes /users/:user_id/profile
       User.find(params[:user_id]) == current_user) ||
-      !params[:user_id]
+      !params[:user_id] # route /profile
   end
 end
