@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
 
   private
   def get_profile
-    if params[:id] # route /users/:user_id/profile
+    if params[:user_id] # route /users/:user_id/profile
       @profile = User.find(params[:user_id]).profile
     elsif user_signed_in? # routes /profile
       @profile = current_user.profile || (current_user.profile = new_profile)
