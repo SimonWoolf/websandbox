@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   helper :versions
 
   before_action :get_profile, only: [:show, :edit, :create, :update, :destroy, :history]
+  before_filter :authenticate_user!, only: [:update, :create, :destroy]
 
   def index
     @profiles = Profile.all
@@ -51,4 +52,12 @@ class ProfilesController < ApplicationController
     Profile.new(html: '<p>Here is an editable html element</p>')
   end
 
+  def authenticate_user!
+    if (params[:user_id] && User.find(params[:user_id]) == current_user) || !params[:user_id]
+      super
+    elsif params[:user_id]
+      flash[:error] = "Can only edit your own or your friends' pages"
+      redirect_to user_profile_path(params[:user_id])
+    end
+  end
 end
