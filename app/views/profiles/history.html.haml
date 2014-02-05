@@ -1,4 +1,4 @@
-.medium-8.small-centered.columns
+.medium-10.small-centered.columns
   %table{width: '100%'}
     %thead
       %tr
@@ -9,8 +9,8 @@
       - @versions.each do |version|
         %tr.tablerow
           %td= version.created_at
-          %td= version.whodunnit
-          - if version.event == "create" 
+          %td= version.whodunnit && User.find(version.whodunnit).email
+          - if version.event == "create"
             %td
               %i profile created
           - else
