@@ -2,9 +2,10 @@
   %table{width: '100%'}
     %thead
       %tr
-        %th Time
-        %th Edited by
+        %th{width: '200'} Time
+        %th{width: '200'} Edited by
         %th Content
+        %th{width: '200'}
     %tbody
       - @versions.each do |version|
         %tr.tablerow
@@ -14,5 +15,5 @@
             %td
               %i profile created
           - else
-            %td= truncate(version.reify.html, length: 50)
+            %td= truncate(version.reify.html, length: 100)
             %td= linkrevert('Revert to this version', version)
