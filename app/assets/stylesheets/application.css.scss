@@ -22,16 +22,17 @@ td > .verbtns, #versioning > .verbtns {
 #versioning {
   background-color: #CCCCCC;
   text-align: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 
 #profilelink {
   position:fixed;
   top: rem-calc(50px);
-  right: rem-calc(15px);
+  right: rem-calc(50px);
   padding: rem-calc(0px) rem-calc(10px);
   opacity: 0.5;
+  background-color: white;
   z-index: 1; /* on top of any floats */
 }
 
