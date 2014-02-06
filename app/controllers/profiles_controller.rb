@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
   end
 
   def new_profile
-    Profile.new(html: '<p>Here is an editable html element</p>')
+    Profile.new(html: '<p id="test_element">Here is an editable html element</p>')
   end
 
   def authenticate_user!

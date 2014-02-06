@@ -18,6 +18,7 @@
 function updateHTML(text, clickedElement){
 	$elem = $(text)
 	$(clickedElement).replaceWith($elem)
+	$elem.draggable()
 	return $elem;
 }
 
@@ -28,10 +29,18 @@ var show_flash = function(msg) {
 $(function() {
   $(document).foundation();
 
+  $('.profile_content *').draggable({ disabled: true })
+
   $('#edit_button').on('click', function(e){
   	$('.profile_content').toggleClass('uneditable')
-  });
-
+  	$(this).toggleClass('editing')
+  	if($(this).hasClass('editing')){
+  		$('.profile_content *').draggable('enable')
+  	}else{
+  		$('.profile_content *').draggable('disable')
+  	}
+  })
+  
   $('#save').on('click', function() {
     $.ajax({
       type: "PATCH",
