@@ -8,4 +8,12 @@ describe UsersController do
       response.should be_success
     end
   end
+
+  describe "GET 'index'" do
+    it "returns http success" do
+      create(:user)
+      get 'index'
+      response.should be_success
+    end
+  end
 end

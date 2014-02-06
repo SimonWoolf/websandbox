@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :index] do
     resource :profile, only: [:show, :update] do
       get "versions" => :history, as: 'versions'
       post "versions/:id" => "versions#revert", as: "revert_version"
     end
   end
 
-  resource :profile, only: [:show, :update]do
+  resource :profile, only: [:show, :update] do
     get "versions" => :history, as: 'versions'
     post "versions/:id" => "versions#revert", as: "revert_version"
   end
