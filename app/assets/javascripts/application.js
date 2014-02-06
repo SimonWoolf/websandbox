@@ -39,6 +39,7 @@ $(function() {
 
    //Only register *click* for editable elements
   var clickedElement;
+  var editable = '*:not(html,body,.uneditable,.uneditable *,#uneditable)'
 
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
@@ -47,7 +48,7 @@ $(function() {
 		}
   })
 
-	$('html').on('click', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
+	$('html').on('click', editable, function(event){
 		console.log(event)
 		$('#edit_panel').show()
 
@@ -56,10 +57,10 @@ $(function() {
 		clickedElement = event.target
 	})
 
-	$('html').on('mouseenter', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
+	$('html').on('mouseenter', editable, function(event){
 		$(this).css({'border':'2px dashed red'})
 	})
-	$('html').on('mouseleave', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(){
+	$('html').on('mouseleave', editable, function(){
 		console.log('hover')
 		$(this).css({'border':'none'})
 	})
