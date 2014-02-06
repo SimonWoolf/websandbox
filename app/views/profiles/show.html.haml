@@ -3,6 +3,9 @@
 	%a.alert.button.verbtns Save
 	-# needs to do an ajax PATCH to /profile with the html in div-editable
 	= link_to 'Version history', versions_profile_path, class: "success button verbtns"
+- if @profile != current_user.profile
+	.secondary.button#profilelink
+		= link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
 #control_content.uneditable
 	%a.button.tiny#edit_button Edit
 	.panel#edit_panel
@@ -26,5 +29,3 @@
 							%textarea#edit_field_css{cols: '40'}
 .profile_content.uneditable#uneditable
 	= @profile.html.html_safe
-
-

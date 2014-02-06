@@ -1,0 +1,5 @@
+%tr
+  %td{width: '30%'}= user.name
+  %td{width: '30%'}= user.email
+  %td{width: '20%'}= link_to 'User page', user, class: "button verbtns"
+  %td{width: '20%'}= link_to 'Profile', user_profile_path(user), class: "button verbtns"

@@ -1,18 +1,19 @@
-.medium-8.small-centered.columns
+.medium-10.small-centered.columns
   %table{width: '100%'}
     %thead
       %tr
-        %th Time
-        %th Edited by
+        %th{width: '200'} Time
+        %th{width: '200'} Edited by
         %th Content
+        %th{width: '200'}
     %tbody
       - @versions.each do |version|
         %tr.tablerow
           %td= version.created_at
-          %td= version.whodunnit
-          - if version.event == "create" 
+          %td= version.whodunnit && User.find(version.whodunnit).name
+          - if version.event == "create"
             %td
               %i profile created
           - else
-            %td= truncate(version.reify.html, length: 50)
+            %td= truncate(version.reify.html, length: 100)
             %td= linkrevert('Revert to this version', version)
