@@ -23,7 +23,7 @@ function updateHTML(text, clickedElement){
 }
 
 var show_flash = function(msg) {
-    $("#flash").html(msg).delay(500).fadeOut("slow");
+    $("#flash").html(msg).show().delay(500).fadeOut("slow");
 };
 
 $(function() {
@@ -40,7 +40,7 @@ $(function() {
   		$('.profile_content *').draggable('disable')
   	}
   })
-  
+
   $('#save').on('click', function() {
     $.ajax({
       type: "PATCH",
