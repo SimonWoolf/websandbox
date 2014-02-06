@@ -10,8 +10,8 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    %header
+    %header.uneditable
       = render 'layouts/navigation'
-    %main{:role => "main"}
+    %main#uneditable{:role => "main"}
       = render 'layouts/messages'
       = yield
