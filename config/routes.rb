@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  root 'profiles#show'
+  patch '/' => 'profiles#update' #make saving work if at the root
+
   devise_for :users
 
   resources :users, only: [:show, :index] do
@@ -17,7 +21,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'profiles#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

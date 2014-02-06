@@ -26,7 +26,15 @@ $(function() {
 
   $('#edit_button').on('click', function(e){
   	$('.profile_content').toggleClass('uneditable')
-  })
+  });
+
+  $('#save').on('click', function() {
+    $.ajax({
+      type: "PATCH",
+      url: $(location).attr('pathname'),
+      data: {profile: {html: $('.profile_content').html().trim()}}
+    });
+  });
 
   // Only register *click* for editable elements
   var clickedElement;
@@ -35,7 +43,7 @@ $(function() {
 		if($(event.target).closest('#edit_panel').length) return true;
 		if($(event.target).is('html,body,.uneditable,.uneditable *,#uneditable') && $('#edit_panel').is(':visible')) {
 			$('#edit_panel').hide();
-		}	
+		}
   })
 
 	$('html').on('click', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
