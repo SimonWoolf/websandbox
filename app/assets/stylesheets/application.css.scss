@@ -12,6 +12,8 @@
  *= require_tree .
  */
 
+@import "foundation/functions";
+
 td > .verbtns, #versioning > .verbtns {
   margin: 0px;
   padding: 0.3rem 0.5rem;
@@ -22,4 +24,18 @@ td > .verbtns, #versioning > .verbtns {
   text-align: center;
   width: 80%;
   margin: 0 auto;
+}
+
+#profilelink {
+  position:fixed;
+  top: rem-calc(50px);
+  right: rem-calc(15px);
+  padding: rem-calc(0px) rem-calc(10px);
+  opacity: 0.5;
+  z-index: 1; /* on top of any floats */
+}
+
+#profilelink:hover {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
