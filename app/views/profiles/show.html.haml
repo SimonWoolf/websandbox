@@ -3,16 +3,16 @@
 	%a.alert.button.verbtns Save
 	-# needs to do an ajax PATCH to /profile with the html in div-editable
 	= link_to 'Version history', versions_profile_path, class: "success button verbtns"
-- if @profile != current_user.profile
+- if viewing_someone_elses_profile?
 	.secondary.button#profilelink
 		= link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
 #control_content.uneditable
 	%a.button.tiny#edit_button Edit
 	.panel#edit_panel
 		%dl.tabs(data-tab)
-			%dd.active 
+			%dd.active
 				%a{href: '#panel-1'} HTML
-			%dd 
+			%dd
 				%a{href: '#panel-2'} CSS
 		.tabs-content
 			.content#panel-1.active
