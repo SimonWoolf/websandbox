@@ -25,7 +25,8 @@ class ProfilesController < ApplicationController
 
   def update
     @profile.update(params[:profile].permit(:html))
-    render json: {status: 'success'}
+    flash.now[:notice] = "Saved"
+    render :show
   end
 
   def destroy
