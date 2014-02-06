@@ -47,9 +47,6 @@ $(function() {
   })
 
 	$('html').on('click', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
-		console.log('clicked')
-		console.log('other')
-		console.log('edit')
 		console.log(event)
 		$('#edit_panel').show()
 
@@ -58,7 +55,15 @@ $(function() {
 		clickedElement = event.target
 	})
 
-	$('#edit_field_html').on('keydown',function(pressed){
+	$('html').on('mouseenter', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
+		$(this).css({'border':'2px dashed red'})
+	})
+	$('html').on('mouseleave', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(){
+		console.log('hover')
+		$(this).css({'border':'none'})
+	})
+
+	$('#edit_field_html').on('keydown',function(pressed){		
 		if(pressed.keyCode == 13){
 			pressed.preventDefault()
 			var text = $('#edit_field_html').val()
