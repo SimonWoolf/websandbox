@@ -6,6 +6,6 @@
 
 - if @profile != current_user.profile
   .secondary.button#profilelink
-    = link_to "Viewing #{@profile.user.email}'s profile", user_path(@profile.user)
+    = link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
 
 = @profile.html.html_safe

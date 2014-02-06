@@ -10,7 +10,7 @@
       - @versions.each do |version|
         %tr.tablerow
           %td= version.created_at
-          %td= version.whodunnit && User.find(version.whodunnit).email
+          %td= version.whodunnit && User.find(version.whodunnit).name
           - if version.event == "create"
             %td
               %i profile created
