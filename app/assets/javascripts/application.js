@@ -22,10 +22,6 @@ function updateHTML(text, clickedElement){
 	return $elem;
 }
 
-var show_flash = function(msg) {
-    $("#flash").html(msg).show().delay(500).fadeOut("slow");
-};
-
 $(function() {
   $(document).foundation();
 
@@ -40,15 +36,6 @@ $(function() {
   		$('.profile_content *').draggable('disable')
   	}
   })
-
-  $('#save').on('click', function() {
-    $.ajax({
-      type: "PATCH",
-      url: $(location).attr('pathname'),
-      data: {profile: {html: $('.profile_content').html().trim()}},
-      success: function(){show_flash("<div class='alert-box round notice'>Save successful</div>")}
-    });
-  });
 
    //Only register *click* for editable elements
   var clickedElement;
