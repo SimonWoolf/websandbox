@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
 
   def update
     @profile.update(params[:profile].permit(:html))
-    redirect_to profile_path(@profile)
+    render json: {status: 'success'}
   end
 
   def destroy
