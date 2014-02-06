@@ -1,4 +1,5 @@
 #versioning.uneditable
+	%a.button.verbtns#edit_button Edit
 	= linkrevert('Revert to previous version', @profile.versions(true).last)
 	%a.alert.button.verbtns Save
 	-# needs to do an ajax PATCH to /profile with the html in div-editable
@@ -7,7 +8,6 @@
 	.secondary.button#profilelink
 		= link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
 #control_content.uneditable
-	%a.button.tiny#edit_button Edit
 	.panel#edit_panel
 		%dl.tabs(data-tab)
 			%dd.active
