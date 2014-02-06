@@ -39,16 +39,17 @@ $(function() {
 
    //Only register *click* for editable elements
   var clickedElement;
-  var editable = '*:not(html,body,.uneditable,.uneditable *,#uneditable)'
+  var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
+  var editable = '*:not(' + uneditable + ')'
 
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
-		if($(event.target).is('html,body,.uneditable,.uneditable *,#uneditable') && $('#edit_panel').is(':visible')) {
+		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
 			$('#edit_panel').hide();
 		}
   })
 
-	$('html').on('click', editable, function(event){
+	$('.profile_content').on('click', editable, function(event){
 		console.log(event)
 		$('#edit_panel').show()
 
@@ -57,10 +58,10 @@ $(function() {
 		clickedElement = event.target
 	})
 
-	$('html').on('mouseenter', editable, function(event){
+	$('.profile_content').on('mouseenter', editable, function(event){
 		$(this).css({'border':'2px dashed red'})
 	})
-	$('html').on('mouseleave', editable, function(){
+	$('.profile_content').on('mouseleave', editable, function(){
 		console.log('hover')
 		$(this).css({'border':'none'})
 	})
