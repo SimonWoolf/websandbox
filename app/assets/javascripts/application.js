@@ -19,14 +19,23 @@
 function updateHTML(text, clickedElement){
 	$elem = $(text)
 	$(clickedElement).replaceWith($elem)
+	$elem.draggable()
 	return $elem;
 }
 
 $(function() {
   $(document).foundation();
 
+  $('.profile_content *').draggable({ disabled: true })
+
   $('#edit_button').on('click', function(e){
   	$('.profile_content').toggleClass('uneditable')
+  	$(this).toggleClass('editing')
+  	if($(this).hasClass('editing')){
+  		$('.profile_content *').draggable('enable')
+  	}else{
+  		$('.profile_content *').draggable('disable')
+  	}
   })
 
   // Only register *click* for editable elements
