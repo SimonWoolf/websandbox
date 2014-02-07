@@ -17,9 +17,14 @@
 
 function updateHTML(text, clickedElement){
 	$elem = $(text)
-	$(clickedElement).replaceWith($elem)
-	$elem.draggable()
-	return $elem;
+  console.log(JSON.stringify($elem))
+  if($elem.length > 1) {
+    show_flash("One tag only", "warning")
+  } else {
+    $(clickedElement).replaceWith($elem)
+    $elem.draggable()
+    return $elem;
+  }
 }
 
 function updateFromFieldsAndHidePanel(clickedElement){
@@ -59,7 +64,7 @@ $(function() {
   })
 
 	$('.profile_content').on('click', editable, function(event){
-		console.log(event)
+		console.log(event.target.outerHTML)
     $('#edit_panel').show();
 		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'})
@@ -79,7 +84,6 @@ $(function() {
 		$(this).css({'border':'2px dashed red'})
 	})
 	$('.profile_content').on('mouseleave', editable, function(){
-		console.log('hover')
 		$(this).css({'border':'none'})
 	})
 

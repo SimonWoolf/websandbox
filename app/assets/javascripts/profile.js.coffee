@@ -2,9 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+format_flash = (msg, type) ->
+  "<div class='alert-box " + type + "'>" + msg + "</div>"
 
-show_flash = (msg) ->
-  $("#flash").html(msg).show().delay(500).fadeOut("slow")
+@show_flash = (msg, type) ->
+  $("#flash").html(format_flash(msg, type))
+             .show()
+             .delay(500)
+             .fadeOut("slow")
 
 $(document).ready ->
   $('#save').on 'click', ->
@@ -12,4 +17,4 @@ $(document).ready ->
       type: "PATCH",
       url: $(location).attr('pathname'),
       data: {profile: {html: $('.profile_content').html().trim()}},
-      success: -> show_flash("<div class='alert-box round notice'>Save successful</div>")
+      success: -> show_flash("Save successful", "notice")
