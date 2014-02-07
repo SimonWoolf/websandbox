@@ -53,7 +53,8 @@ $(function() {
 		console.log(event)
 		$('#edit_panel').show()
 
-		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px' ,'top': event.target.clientHeight + event.target.offsetTop + 'px'})
+		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
+                          'top': event.target.clientHeight + event.target.offsetTop + 'px'})
 		$('#edit_field_html').val(event.target.outerHTML)
 		clickedElement = event.target
 	})
@@ -66,15 +67,15 @@ $(function() {
 		$(this).css({'border':'none'})
 	})
 
-	$('#edit_field_html').on('keydown',function(pressed){		
-		if(pressed.keyCode == 13){
+	$('#edit_field_html').on('keydown',function(pressed){
+		if(pressed.keyCode == 13){ //enter
 			pressed.preventDefault()
 			var text = $('#edit_field_html').val()
 			clickedElement = updateHTML(text, clickedElement)[0];
 			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 27){
+		}else if(pressed.keyCode == 27){ //Esc
 			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 8 && pressed.shiftKey){
+		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
 			$('#edit_field_html').val("");
 			clickedElement = updateHTML("", clickedElement)[0];
 		}
