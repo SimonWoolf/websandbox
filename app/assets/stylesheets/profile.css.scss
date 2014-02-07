@@ -13,20 +13,10 @@
   height: 16rem;
   padding: 10px 0px;
 	border-radius: 5px;
-}
-
-.tabs-content *{
-	border-radius: 5px;
-}
-
-.tabs a{
-	padding: 2px 15px !important;
-	font-size: 11px !important;
-}
-
-.tabs{
-	border-bottom: 1px solid #808080;
-	padding-bottom: 1px;
+  background: linear-gradient(to bottom,  #454850 0%,#000000 100%); /* W3C */
+  label, h5 small {
+    color: white;
+  }
 }
 
 textarea{
