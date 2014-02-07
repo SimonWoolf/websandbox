@@ -52,10 +52,10 @@ $(function() {
 	$('.profile_content').on('click', editable, function(event){
 		console.log(event)
 		$('#edit_panel').show()
-
 		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'})
-		$('#edit_field_html').val(event.target.outerHTML)
+    $('#edit_field_css').val($(event.target).attr('style'))
+		$('#edit_field_html').val($(event.target).removeAttr("style").prop('outerHTML'))
 		clickedElement = event.target
 	})
 
@@ -71,11 +71,13 @@ $(function() {
 		if(pressed.keyCode == 13){ //enter
 			pressed.preventDefault()
 			var text = $('#edit_field_html').val()
+			var css = $('#edit_field_css').val()
 			clickedElement = updateHTML(text, clickedElement)[0];
+			$(clickedElement).attr('style', css);
 			$('#edit_panel').hide();
 		}else if(pressed.keyCode == 27){ //Esc
 			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
+		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace
 			$('#edit_field_html').val("");
 			clickedElement = updateHTML("", clickedElement)[0];
 		}
