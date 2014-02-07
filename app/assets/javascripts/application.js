@@ -67,8 +67,10 @@ $(function() {
 		$(this).css({'border':'none'})
 	})
 
-	$('#edit_field_html').on('keydown',function(pressed){
-		if(pressed.keyCode == 13){ //enter
+	$('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
+		if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
+      // do not override -- so can use this to insert a newline
+    }else if(pressed.keyCode == 13){ //enter
 			pressed.preventDefault()
 			var text = $('#edit_field_html').val()
 			var css = $('#edit_field_css').val()
