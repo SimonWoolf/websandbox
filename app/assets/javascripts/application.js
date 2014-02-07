@@ -36,6 +36,7 @@ $(function() {
   $('.profile_content *').draggable({ disabled: true })
 
   $('#edit_button').on('click', function(e){
+    $('#grid-background').fadeToggle('slow');
   	$('.profile_content').toggleClass('uneditable')
   	$(this).toggleClass('editing')
   	if($(this).hasClass('editing')){
@@ -59,7 +60,7 @@ $(function() {
 
 	$('.profile_content').on('click', editable, function(event){
 		console.log(event)
-		$('#edit_panel').show()
+    $('#edit_panel').show();
 		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'})
     $('#edit_field_css').val($(event.target)

@@ -6,7 +6,7 @@
 show_flash = (msg) ->
   $("#flash").html(msg).show().delay(500).fadeOut("slow")
 
-$ ->
+$(document).ready ->
   $('#save').on 'click', ->
     $.ajax
       type: "PATCH",

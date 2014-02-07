@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#grid-background {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: image-url('grid15.png');
+  background-color: #DDF;
+  display: none;
+}
+
 #edit_button.editing{
 	background-color: gray;
 }
