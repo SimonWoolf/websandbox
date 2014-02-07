@@ -22,6 +22,14 @@ function updateHTML(text, clickedElement){
 	return $elem;
 }
 
+function updateFromFieldsAndHidePanel(clickedElement){
+  var text = $('#edit_field_html').val()
+  var css = $('#edit_field_css').val()
+  clickedElement = updateHTML(text, clickedElement)[0];
+  $(clickedElement).attr('style', css);
+  $('#edit_panel').hide();
+}
+
 $(function() {
   $(document).foundation();
 
@@ -45,7 +53,7 @@ $(function() {
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
 		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
-			$('#edit_panel').hide();
+			updateFromFieldsAndHidePanel(clickedElement);
 		}
   })
 
@@ -59,6 +67,7 @@ $(function() {
                              .replace(/;\s?/g, ";\n") //put newlines after semicolons in css
                             );
 		$('#edit_field_html').val($(event.target)
+                              .clone() // so that style isn't dropped from the preview html
                               .removeAttr("style")
                               .prop('outerHTML')
                              );
@@ -77,15 +86,11 @@ $(function() {
 		if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
       // do not override -- so can use this to insert a newline
     }else if(pressed.keyCode == 13){ //enter
-			pressed.preventDefault()
-			var text = $('#edit_field_html').val()
-			var css = $('#edit_field_css').val()
-			clickedElement = updateHTML(text, clickedElement)[0];
-			$(clickedElement).attr('style', css);
-			$('#edit_panel').hide();
+			pressed.preventDefault();
+      updateFromFieldsAndHidePanel(clickedElement);
 		}else if(pressed.keyCode == 27){ //Esc
 			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace //shift+backspace
+		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
 			$('#edit_field_html').val("");
 			clickedElement = updateHTML("", clickedElement)[0];
 		}
