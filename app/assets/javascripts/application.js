@@ -45,8 +45,10 @@ $(function() {
   	$('.profile_content').toggleClass('uneditable')
   	$(this).toggleClass('editing')
   	if($(this).hasClass('editing')){
+      $(this).html('Stop editing')
   		$('.profile_content *').draggable('enable')
   	}else{
+      $(this).html('Edit')
   		$('.profile_content *').draggable('disable')
   	}
   })
