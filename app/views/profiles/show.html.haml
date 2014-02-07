@@ -1,34 +1,25 @@
 #versioning.uneditable
-	%a.button.verbtns#edit_button Edit
-	= linkrevert('Revert to previous version', @profile.versions(true).last)
-	%a.alert.button.verbtns#save Save
-	-# needs to do an ajax PATCH to /profile with the html in div-editable
-	= link_to 'Version history', versions_profile_path, class: "success button verbtns"
+  %a.button.verbtns#edit_button Edit
+  = linkrevert('Revert to previous version', @profile.versions(true).last)
+  %a.alert.button.verbtns#save Save
+  -# needs to do an ajax PATCH to /profile with the html in div-editable
+  = link_to 'Version history', versions_profile_path, class: "success button verbtns"
 
 - if viewing_someone_elses_profile?
-	.secondary.button#profilelink
-		= link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
+  .secondary.button#profilelink
+    = link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
 
 #control_content.uneditable
-	.panel#edit_panel
-		%dl.tabs(data-tab)
-			%dd.active
-				%a{href: '#panel-1'} HTML
-			%dd
-				%a{href: '#panel-2'} CSS
-		.tabs-content
-			.content#panel-1.active
-				%form
-					.row
-						.large-12.columns
-							%label HTML
-							%textarea#edit_field_html{cols: '40'}
-			.content#panel-2
-				%form
-					.row
-						.large-12.columns
-							%label CSS
-							%textarea#edit_field_css{cols: '40'}
+  .panel#edit_panel
+    .row
+      .small-6.columns.content#panel-1
+        %form
+          %label HTML
+          %textarea#edit_field_html{cols: '40'}
+      .small-6.columns.content#panel-2
+        %form
+          %label CSS
+          %textarea#edit_field_css{cols: '40'}
 
 .profile_content.uneditable#uneditable
-	= @profile.html.html_safe
+  = @profile.html.html_safe
