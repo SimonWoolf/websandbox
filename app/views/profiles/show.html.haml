@@ -20,6 +20,10 @@
         %form
           %label CSS
           %textarea#edit_field_css{cols: '40'}
+    .row
+      .small-12.columns
+        %h5
+          %small enter to preview, shift+enter to insert newline
 
 .profile_content.uneditable#uneditable
   = @profile.html.html_safe
