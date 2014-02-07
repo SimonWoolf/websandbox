@@ -13,13 +13,13 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'factory_girl_rails', "~> 4.0", require: false
   gem 'rails_layout' #see http://railsapps.github.io/rails-foundation.html
-  gem 'paper_trail', '~> 3.0.0' #model versioning
 end
 
 group :production do
   gem 'rails_12factor'
 end
 
+gem 'paper_trail', '~> 3.0.0' #model versioning
 gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 gem 'thin' # use to make websockets work
 gem 'websocket-rails'
