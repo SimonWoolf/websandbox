@@ -54,8 +54,14 @@ $(function() {
 		$('#edit_panel').show()
 		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'})
-    $('#edit_field_css').val($(event.target).attr('style').replace(/;\s?/g, ";\n"));
-		$('#edit_field_html').val($(event.target).removeAttr("style").prop('outerHTML'));
+    $('#edit_field_css').val($(event.target)
+                             .attr('style')
+                             .replace(/;\s?/g, ";\n") //put newlines after semicolons in css
+                            );
+		$('#edit_field_html').val($(event.target)
+                              .removeAttr("style")
+                              .prop('outerHTML')
+                             );
 		clickedElement = event.target
 	})
 
