@@ -20,4 +20,4 @@ $(document).ready ->
       success: -> show_flash("Save successful", "notice")
       statusCode:
         401: ->
-          show_flash("You need to create an account to save your profile.  <a href='/users/sign_up' style='color: white;'>Sign up</a>")
+          $('#signUpModal').foundation('reveal', 'open')

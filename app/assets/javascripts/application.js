@@ -16,20 +16,19 @@
 //= require_tree .
 
 function updateHTML(text, clickedElement){
-  $elem = $(text)
+  var $elem = $(text);
   if($elem.length > 1) {
-    show_flash("One tag only", "warning")
+    show_flash("One tag only", "warning");
   } else {
-    $(clickedElement).replaceWith($elem)
-    $elem.css({'color':'blue'})
-    $elem.draggable()
+    $(clickedElement).replaceWith($elem);
+    $elem.draggable();
     return $elem;
   }
 }
 
 function updateFromFieldsAndHidePanel(clickedElement){
-  var text = $('#edit_field_html').val()
-  var css = $('#edit_field_css').val()
+  var text = $('#edit_field_html').val();
+  var css = $('#edit_field_css').val();
   clickedElement = updateHTML(text, clickedElement)[0];
   $(clickedElement).attr('style', css);
   $('#edit_panel').hide();
@@ -38,28 +37,28 @@ function updateFromFieldsAndHidePanel(clickedElement){
 $(function() {
   $(document).foundation();
 
-  $('#edit_panel').draggable()
+  $('#edit_panel').draggable();
 
-  $('.profile_content *').draggable({ disabled: true })
+  $('.profile_content *').draggable({ disabled: true });
 
-  $('#edit_button').on('click', function(e){
+  $('#edit_button').on('click', function(){
     $('#grid-background').fadeToggle('slow');
     $('.profile_content').toggleClass('uneditable')
     $('#add_button').toggle();
     $(this).toggleClass('editing')
     if($(this).hasClass('editing')){
-      $(this).html('Stop editing')
-      $('.profile_content *').draggable('enable')
+      $(this).html('Stop editing');
+      $('.profile_content *').draggable('enable');
     }else{
-      $(this).html('Edit')
-      $('.profile_content *').draggable('disable')
+      $(this).html('Edit');
+      $('.profile_content *').draggable('disable');
     }
-  })
+  });
 
    //Only register *click* for editable elements
   var clickedElement;
-  var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
-  var editable = '*:not(' + uneditable + ')'
+  var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable';
+  var editable = '*:not(' + uneditable + ')';
 
   $('#add_button').on('click',function(e){
     console.log(e)
@@ -73,13 +72,13 @@ $(function() {
 		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible') && $(event.target).is(":not('#add_button')")) {
 			updateFromFieldsAndHidePanel(clickedElement);
 		}
-  })
+  });
 
   $('.profile_content').on('click', editable, function(event){
-    console.log(event.target.outerHTML)
+    console.log(event.target.outerHTML);
     $('#edit_panel').show();
     $('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
-                          'top': event.target.clientHeight + event.target.offsetTop + 'px'})
+                          'top': event.target.clientHeight + event.target.offsetTop + 'px'});
     $('#edit_field_css').val($(event.target)
                              .attr('style')
                              .replace(/;\s?/g, ";\n") //put newlines after semicolons in css
@@ -89,8 +88,8 @@ $(function() {
                               .removeAttr("style")
                               .prop('outerHTML')
                              );
-    clickedElement = event.target
-  })
+    clickedElement = event.target;
+  });
 
   $('.profile_content').on('mouseenter', editable, function(event){
     $(this).css({'box-shadow':'0 0 0 1px red inset'})
@@ -100,17 +99,17 @@ $(function() {
   })
 
   $('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
-    if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
+    if(pressed.keyCode === 13 && pressed.shiftKey){ // shift+enter
       // do not override -- so can use this to insert a newline
-    }else if(pressed.keyCode == 13){ //enter
+    }else if(pressed.keyCode === 13){ //enter
       pressed.preventDefault();
       updateFromFieldsAndHidePanel(clickedElement);
-    }else if(pressed.keyCode == 27){ //Esc
+    }else if(pressed.keyCode === 27){ //Esc
       $('#edit_panel').hide();
-    }else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
+    }else if(pressed.keyCode === 8 && pressed.shiftKey){ //shift+backspace
       $('#edit_field_html').val("");
       clickedElement = updateHTML("", clickedElement)[0];
     }
-  })
+  });
 
 });
