@@ -37,6 +37,12 @@ function updateFromFieldsAndHidePanel(clickedElement){
 $(function() {
   $(document).foundation();
 
+  $('#edit_panel').draggable().resizable({resize: function(e, ui){
+  	var widthChange = ui.size.width - 30
+  	var heightChange = ui.size.height - 80
+  	$('#edit_field_html').css({'width': widthChange , 'height': heightChange})
+  }})
+
   $('.profile_content *').draggable({ disabled: true })
 
   $('#edit_button').on('click', function(e){
