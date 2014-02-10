@@ -16,7 +16,7 @@
 //= require_tree .
 
 function updateHTML(text, clickedElement){
-	$elem = $(text)
+  $elem = $(text)
   if($elem.length > 1) {
     show_flash("One tag only", "warning")
   } else {
@@ -38,24 +38,24 @@ $(function() {
   $(document).foundation();
 
   $('#edit_panel').draggable().resizable({resize: function(e, ui){
-  	var widthChange = ui.size.width - 30
-  	var heightChange = ui.size.height - 80
-  	$('#edit_field_html').css({'width': widthChange , 'height': heightChange})
+    var widthChange = ui.size.width - 30
+    var heightChange = ui.size.height - 80
+    $('#edit_field_html').css({'width': widthChange , 'height': heightChange})
   }})
 
   $('.profile_content *').draggable({ disabled: true })
 
   $('#edit_button').on('click', function(e){
     $('#grid-background').fadeToggle('slow');
-  	$('.profile_content').toggleClass('uneditable')
-  	$(this).toggleClass('editing')
-  	if($(this).hasClass('editing')){
+    $('.profile_content').toggleClass('uneditable')
+    $(this).toggleClass('editing')
+    if($(this).hasClass('editing')){
       $(this).html('Stop editing')
-  		$('.profile_content *').draggable('enable')
-  	}else{
+      $('.profile_content *').draggable('enable')
+    }else{
       $(this).html('Edit')
-  		$('.profile_content *').draggable('disable')
-  	}
+      $('.profile_content *').draggable('disable')
+    }
   })
 
    //Only register *click* for editable elements
@@ -63,49 +63,49 @@ $(function() {
   var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
   var editable = '*:not(' + uneditable + ')'
 
-	$('*').on('click', function(event){
-		if($(event.target).closest('#edit_panel').length) return true;
-		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
-			updateFromFieldsAndHidePanel(clickedElement);
-		}
+  $('*').on('click', function(event){
+    if($(event.target).closest('#edit_panel').length) return true;
+    if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
+      updateFromFieldsAndHidePanel(clickedElement);
+    }
   })
 
-	$('.profile_content').on('click', editable, function(event){
-		console.log(event.target.outerHTML)
+  $('.profile_content').on('click', editable, function(event){
+    console.log(event.target.outerHTML)
     $('#edit_panel').show();
-		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
+    $('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'})
     $('#edit_field_css').val($(event.target)
                              .attr('style')
                              .replace(/;\s?/g, ";\n") //put newlines after semicolons in css
                             );
-		$('#edit_field_html').val($(event.target)
+    $('#edit_field_html').val($(event.target)
                               .clone() // so that style isn't dropped from the preview html
                               .removeAttr("style")
                               .prop('outerHTML')
                              );
-		clickedElement = event.target
-	})
+    clickedElement = event.target
+  })
 
-	$('.profile_content').on('mouseenter', editable, function(event){
-		$(this).css({'border':'2px dashed red'})
-	})
-	$('.profile_content').on('mouseleave', editable, function(){
-		$(this).css({'border':'none'})
-	})
+  $('.profile_content').on('mouseenter', editable, function(event){
+    $(this).css({'border':'2px dashed red'})
+  })
+  $('.profile_content').on('mouseleave', editable, function(){
+    $(this).css({'border':'none'})
+  })
 
-	$('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
-		if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
+  $('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
+    if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
       // do not override -- so can use this to insert a newline
     }else if(pressed.keyCode == 13){ //enter
-			pressed.preventDefault();
+      pressed.preventDefault();
       updateFromFieldsAndHidePanel(clickedElement);
-		}else if(pressed.keyCode == 27){ //Esc
-			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
-			$('#edit_field_html').val("");
-			clickedElement = updateHTML("", clickedElement)[0];
-		}
-	})
+    }else if(pressed.keyCode == 27){ //Esc
+      $('#edit_panel').hide();
+    }else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
+      $('#edit_field_html').val("");
+      clickedElement = updateHTML("", clickedElement)[0];
+    }
+  })
 
 });
