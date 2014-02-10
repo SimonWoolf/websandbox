@@ -17,7 +17,6 @@
 
 function updateHTML(text, clickedElement){
 	$elem = $(text)
-  console.log(JSON.stringify($elem))
   if($elem.length > 1) {
     show_flash("One tag only", "warning")
   } else {
