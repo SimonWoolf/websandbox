@@ -44,6 +44,7 @@ $(function() {
   $('#edit_button').on('click', function(e){
     $('#grid-background').fadeToggle('slow');
     $('.profile_content').toggleClass('uneditable')
+    $('#add_button').toggle();
     $(this).toggleClass('editing')
     if($(this).hasClass('editing')){
       $(this).html('Stop editing')
@@ -58,6 +59,10 @@ $(function() {
   var clickedElement;
   var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
   var editable = '*:not(' + uneditable + ')'
+
+  $('#add_button').on('click',function(e){
+    
+  })
 
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
@@ -84,10 +89,10 @@ $(function() {
   })
 
   $('.profile_content').on('mouseenter', editable, function(event){
-    $(this).css({'border':'2px dashed red'})
+    $(this).css({'box-shadow':'0 0 0 1px red inset'})
   })
   $('.profile_content').on('mouseleave', editable, function(){
-    $(this).css({'border':'none'})
+    $(this).css({'box-shadow':'none'})
   })
 
   $('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
