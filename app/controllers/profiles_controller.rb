@@ -20,6 +20,8 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    return if not_your_profile? || logged_out_on_existing_profile?
+
     if @profile.update(params[:profile].permit(:html))
       if user_signed_in?
         flash.now[:notice] = "Saved"
@@ -42,6 +44,15 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def not_your_profile?
+    user_signed_in? && params[:user_id] && params[:user_id].to_i != current_user.id
+  end
+
+  def logged_out_on_existing_profile?
+    !user_signed_in? && params[:user_id]
+  end
+
   def get_profile
     if params[:user_id] # route /users/:user_id/profile
       @profile = User.find(params[:user_id]).profile
