@@ -11,10 +11,6 @@ class ProfilesController < ApplicationController
   def show
   end
 
-  def new
-    @profile = Profile.new
-  end
-
   def edit
   end
 
@@ -50,7 +46,7 @@ class ProfilesController < ApplicationController
   end
 
   def new_profile
-    Profile.new(html: '<p id="test_element">Here is an editable html element</p>')
+    Profile.new(html: '<p id="example_element">Here is an editable html element</p>')
   end
 
   def authenticate_user!
