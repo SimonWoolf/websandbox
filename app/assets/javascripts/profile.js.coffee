@@ -8,7 +8,7 @@ format_flash = (msg, type) ->
 @show_flash = (msg, type) ->
   $("#flash").html(format_flash(msg, type))
              .show()
-             .delay(500)
+             .delay(1000)
              .fadeOut("slow")
 
 $(document).ready ->
@@ -18,3 +18,6 @@ $(document).ready ->
       url: $(location).attr('pathname'),
       data: {profile: {html: $('.profile_content').html().trim()}},
       success: -> show_flash("Save successful", "notice")
+      statusCode:
+        401: ->
+          show_flash("You need to create an account to save your profile.  <a href='/users/sign_up' style='color: white;'>Sign up</a>")
