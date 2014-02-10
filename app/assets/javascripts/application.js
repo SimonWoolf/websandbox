@@ -29,6 +29,12 @@ var show_flash = function(msg) {
 $(function() {
   $(document).foundation();
 
+  $('#edit_panel').draggable().resizable({resize: function(e, ui){
+  	var widthChange = ui.size.width - 30
+  	var heightChange = ui.size.height - 80
+  	$('#edit_field_html').css({'width': widthChange , 'height': heightChange})
+  }})
+
   $('.profile_content *').draggable({ disabled: true })
 
   $('#edit_button').on('click', function(e){
@@ -60,20 +66,30 @@ $(function() {
 		}
   })
 
-	$('html').on('click', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
-		console.log(event)
-		$('#edit_panel').show()
+  $('html').on('click','main', function(event){
+  	console.log(event)
+  	if($('.profile_content').hasClass('uneditable')){
+		}else if($(event.target).is('main') || $(event.target).is('.profile_content')){
+			console.log('again')
+			$('#edit_panel').show()
+			$('#edit_panel').css({'left': event.clientLeft + 15 + 'px' ,'top': event.offsetTop + 'px'})
+			$('#edit_field_html').val(" ")
+			clickedElement = $('.profile_content').append("<div id='tmp'></div>").find($('#tmp'))
+		}
+  })
 
+	$('html').on('click', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(event){
+		console.log('edit')
+		$('#edit_panel').show()
 		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px' ,'top': event.target.clientHeight + event.target.offsetTop + 'px'})
 		$('#edit_field_html').val(event.target.outerHTML)
 		clickedElement = event.target
 	})
 
-	$('html').on('mouseenter', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(event){
+	$('html').on('mouseenter', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(event){
 		$(this).css({'border':'2px dashed red'})
 	})
-	$('html').on('mouseleave', '*:not(html,body,.uneditable,.uneditable *,#uneditable)', function(){
-		console.log('hover')
+	$('html').on('mouseleave', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(){
 		$(this).css({'border':'none'})
 	})
 
