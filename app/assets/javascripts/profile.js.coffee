@@ -14,10 +14,11 @@ format_flash = (msg, type) ->
 $(document).ready ->
   $('#save').on 'click', ->
     $.ajax
-      type: "PATCH",
+      type: "PUT",
       url: $(location).attr('pathname'),
       data: {profile: {html: $('.profile_content').html().trim()}},
       success: -> show_flash("Save successful", "notice")
+      complete: (resp) ->
       statusCode:
         401: ->
           $('#signUpModal').foundation('reveal', 'open')

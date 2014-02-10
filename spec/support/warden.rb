@@ -6,6 +6,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    Warden.test_reset! 
+    Warden.test_reset!
   end
 end

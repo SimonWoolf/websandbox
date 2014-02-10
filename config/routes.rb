@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'profiles#show'
-  patch '/' => 'profiles#update' #make saving work if at the root
+  put '/' => 'profiles#update' #make saving work if at the root
 
   devise_for :users
 

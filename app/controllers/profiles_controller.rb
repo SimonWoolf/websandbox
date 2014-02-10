@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
         render json: {status: 'success'} and return
       else
         session[:guestprofile] = @profile.id
-        # in javascript: catch 401, show flash
+        # in javascript: catch 401, show modal
         render nothing: true, status: 401 and return
       end
     end
