@@ -19,16 +19,16 @@ main {
 }
 
 #edit_button.editing{
-	background-color: gray;
+  background-color: gray;
 }
 
 #edit_panel{
-	position: absolute;
-	display: none;
+  position: absolute;
+  display: none;
   width: 35rem;
   height: 16rem;
   padding: 10px 0px;
-	border-radius: 10px;
+  border-radius: 10px;
   background: image-url('grid15.png');
   background-color: #226;
   box-shadow: inset 0 0 5rem black;
@@ -39,11 +39,11 @@ main {
 }
 
 textarea{
-	resize:none;
-	margin-bottom: 0px;
-	height: 12rem;
+  resize:none;
+  margin-bottom: 0px;
+  height: 12rem;
 }
 
 main{
-	height: 635px;
+  height: 635px;
 }

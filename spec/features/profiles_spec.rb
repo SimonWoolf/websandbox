@@ -37,6 +37,12 @@ describe 'Editing profiles' do
       expect(page).to have_content "legit update"
     end
 
+    it 'should be able to edit your own page on your own url' do
+      page.driver.put profile_path, profile: {html: "legit update"}
+      visit "/users/#{@user1.id}/profile"
+      expect(page).to have_content "legit update"
+    end
+
     it 'should not be able to edit someone elses page' do
       page.driver.put user_profile_path(@user2), profile: {html: "vandalism"}
       visit "/users/#{@user2.id}/profile"
