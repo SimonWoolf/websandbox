@@ -1,5 +1,7 @@
 #grid-background.uneditable
 
+= render 'signupmodal'
+
 #versioning.uneditable
   %a.button.verbtns#edit_button Edit
   = linkrevert('Revert to previous version', @profile.versions(true).last)
