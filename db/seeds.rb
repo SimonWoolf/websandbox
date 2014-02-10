@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 a = User.create(name: 'a', email: 'a@a.com', password: 'password', password_confirmation: 'password')
-a.profile = Profile.new
+a.profile = Profile.create(html:"<p>seed example</p>")
 
 b = User.create(name: 'b', email: 'b@b.com', password: 'password', password_confirmation: 'password')
-b.profile = Profile.new
+b.profile = Profile.create(html:"<p>seed example</p>")
