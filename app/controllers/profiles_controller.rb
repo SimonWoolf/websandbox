@@ -2,17 +2,13 @@ class ProfilesController < ApplicationController
   helper :versions
 
   before_action :get_profile, only: [:show, :edit, :create, :update, :destroy, :history]
-  before_filter :authenticate_user!, only: [:update, :create, :destroy]
+  before_filter :authenticate_user!, only: [:create, :destroy]
 
   def index
     @profiles = Profile.all
   end
 
   def show
-  end
-
-  def new
-    @profile = Profile.new
   end
 
   def edit
@@ -24,9 +20,16 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile.update(params[:profile].permit(:html))
-    flash.now[:notice] = "Saved"
-    render :show
+    if @profile.update(params[:profile].permit(:html))
+      if user_signed_in?
+        flash.now[:notice] = "Saved"
+        render json: {status: 'success'} and return
+      else
+        session[:guestprofile] = @profile.id
+        # in javascript: catch 401, show flash
+        render nothing: true, status: 401 and return
+      end
+    end
   end
 
   def destroy
@@ -43,6 +46,10 @@ class ProfilesController < ApplicationController
     if params[:user_id] # route /users/:user_id/profile
       @profile = User.find(params[:user_id]).profile
     elsif user_signed_in? # routes /profile
+      if session[:guestprofile]
+        current_user.profile = Profile.find(session[:guestprofile])
+        session[:guestprofile] = nil
+      end
       @profile = current_user.profile || (current_user.profile = new_profile)
     else #guest
       @profile = new_profile
@@ -50,7 +57,7 @@ class ProfilesController < ApplicationController
   end
 
   def new_profile
-    Profile.new(html: '<p id="test_element">Here is an editable html element</p>')
+    Profile.new(html: '<p id="example_element">Here is an editable html element</p>')
   end
 
   def authenticate_user!

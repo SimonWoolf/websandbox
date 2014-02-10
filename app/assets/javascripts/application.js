@@ -17,14 +17,22 @@
 
 function updateHTML(text, clickedElement){
 	$elem = $(text)
-	$(clickedElement).replaceWith($elem)
-	$elem.draggable()
-	return $elem;
+  if($elem.length > 1) {
+    show_flash("One tag only", "warning")
+  } else {
+    $(clickedElement).replaceWith($elem)
+    $elem.draggable()
+    return $elem;
+  }
 }
 
-var show_flash = function(msg) {
-    $("#flash").html(msg).delay(500).fadeOut("slow");
-};
+function updateFromFieldsAndHidePanel(clickedElement){
+  var text = $('#edit_field_html').val()
+  var css = $('#edit_field_css').val()
+  clickedElement = updateHTML(text, clickedElement)[0];
+  $(clickedElement).attr('style', css);
+  $('#edit_panel').hide();
+}
 
 $(function() {
   $(document).foundation();
@@ -38,70 +46,63 @@ $(function() {
   $('.profile_content *').draggable({ disabled: true })
 
   $('#edit_button').on('click', function(e){
+    $('#grid-background').fadeToggle('slow');
   	$('.profile_content').toggleClass('uneditable')
   	$(this).toggleClass('editing')
   	if($(this).hasClass('editing')){
+      $(this).html('Stop editing')
   		$('.profile_content *').draggable('enable')
   	}else{
+      $(this).html('Edit')
   		$('.profile_content *').draggable('disable')
   	}
   })
-  
-  $('#save').on('click', function() {
-    $.ajax({
-      type: "PATCH",
-      url: $(location).attr('pathname'),
-      data: {profile: {html: $('.profile_content').html().trim()}},
-      success: function(){show_flash("<div class='alert-box round notice'>Save successful</div>")}
-    });
-  });
 
    //Only register *click* for editable elements
   var clickedElement;
+  var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
+  var editable = '*:not(' + uneditable + ')'
 
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
-		if($(event.target).is('html,body,.uneditable,.uneditable *,#uneditable') && $('#edit_panel').is(':visible')) {
-			$('#edit_panel').hide();
+		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
+			updateFromFieldsAndHidePanel(clickedElement);
 		}
   })
 
-  $('html').on('click','main', function(event){
-  	console.log(event)
-  	if($('.profile_content').hasClass('uneditable')){
-		}else if($(event.target).is('main') || $(event.target).is('.profile_content')){
-			console.log('again')
-			$('#edit_panel').show()
-			$('#edit_panel').css({'left': event.clientLeft + 15 + 'px' ,'top': event.offsetTop + 'px'})
-			$('#edit_field_html').val(" ")
-			clickedElement = $('.profile_content').append("<div id='tmp'></div>").find($('#tmp'))
-		}
-  })
-
-	$('html').on('click', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(event){
-		console.log('edit')
-		$('#edit_panel').show()
-		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px' ,'top': event.target.clientHeight + event.target.offsetTop + 'px'})
-		$('#edit_field_html').val(event.target.outerHTML)
+	$('.profile_content').on('click', editable, function(event){
+		console.log(event.target.outerHTML)
+    $('#edit_panel').show();
+		$('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
+                          'top': event.target.clientHeight + event.target.offsetTop + 'px'})
+    $('#edit_field_css').val($(event.target)
+                             .attr('style')
+                             .replace(/;\s?/g, ";\n") //put newlines after semicolons in css
+                            );
+		$('#edit_field_html').val($(event.target)
+                              .clone() // so that style isn't dropped from the preview html
+                              .removeAttr("style")
+                              .prop('outerHTML')
+                             );
 		clickedElement = event.target
 	})
 
-	$('html').on('mouseenter', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(event){
+	$('.profile_content').on('mouseenter', editable, function(event){
 		$(this).css({'border':'2px dashed red'})
 	})
-	$('html').on('mouseleave', '*:not(html,body,main,.uneditable,.uneditable *,#uneditable)', function(){
+	$('.profile_content').on('mouseleave', editable, function(){
 		$(this).css({'border':'none'})
 	})
 
-	$('#edit_field_html').on('keydown',function(pressed){		
-		if(pressed.keyCode == 13){
-			pressed.preventDefault()
-			var text = $('#edit_field_html').val()
-			clickedElement = updateHTML(text, clickedElement)[0];
+	$('#edit_field_html,#edit_field_css').on('keydown',function(pressed){
+		if(pressed.keyCode == 13 && pressed.shiftKey){ // shift+enter
+      // do not override -- so can use this to insert a newline
+    }else if(pressed.keyCode == 13){ //enter
+			pressed.preventDefault();
+      updateFromFieldsAndHidePanel(clickedElement);
+		}else if(pressed.keyCode == 27){ //Esc
 			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 27){
-			$('#edit_panel').hide();
-		}else if(pressed.keyCode == 8 && pressed.shiftKey){
+		}else if(pressed.keyCode == 8 && pressed.shiftKey){ //shift+backspace
 			$('#edit_field_html').val("");
 			clickedElement = updateHTML("", clickedElement)[0];
 		}
