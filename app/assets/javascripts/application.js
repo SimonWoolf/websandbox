@@ -37,11 +37,7 @@ function updateFromFieldsAndHidePanel(clickedElement){
 $(function() {
   $(document).foundation();
 
-  $('#edit_panel').draggable().resizable({resize: function(e, ui){
-    var widthChange = ui.size.width - 30
-    var heightChange = ui.size.height - 80
-    $('#edit_field_html').css({'width': widthChange , 'height': heightChange})
-  }})
+  $('#edit_panel').draggable()
 
   $('.profile_content *').draggable({ disabled: true })
 
@@ -63,6 +59,31 @@ $(function() {
   var uneditable = 'html,body,.uneditable,.uneditable *,#uneditable'
   var editable = '*:not(' + uneditable + ')'
 
+  $('html').on('click','#grid-background', function(event){
+  	if($('.profile_content').hasClass('uneditable')){
+		}else if($(event.target).is('#grid-background')){
+      console.log("yo")
+      if($('#edit_panel').is(":visible")) {
+      } else {
+        $('#edit_panel').show();
+        // $('#edit_panel').css({'left': event.clientLeft + 15 + 'px' ,'top': event.offsetTop + 'px'})
+        $('#edit_field_html').val(" ")
+        clickedElement = $('.profile_content').append("<div id='tmp'></div>").find($('#tmp'))
+        event.stopPropagation();
+      }
+		}
+  })
+
+	$('*').on('click', function(event){
+		if($(event.target).closest('#edit_panel').length) return true;
+		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
+			updateFromFieldsAndHidePanel(clickedElement);
+		}
+  })
+
+	$('.profile_content').on('click', editable, function(event){
+		console.log('clicky')
+		console.log(event.target.outerHTML)
   $('*').on('click', function(event){
     if($(event.target).closest('#edit_panel').length) return true;
     if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
