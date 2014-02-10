@@ -21,6 +21,7 @@ function updateHTML(text, clickedElement){
     show_flash("One tag only", "warning")
   } else {
     $(clickedElement).replaceWith($elem)
+    $elem.css({'color':'blue'})
     $elem.draggable()
     return $elem;
   }
@@ -61,12 +62,15 @@ $(function() {
   var editable = '*:not(' + uneditable + ')'
 
   $('#add_button').on('click',function(e){
-    
+    console.log(e)
+    clickedElement = $('.profile_content').append("<div style='position:absolute' id='tmp'></div>").find($('#tmp'))
+    $('#tmp').trigger('click');
+    $('#edit_field_html').val(" ")
   })
 
 	$('*').on('click', function(event){
 		if($(event.target).closest('#edit_panel').length) return true;
-		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible')) {
+		if($(event.target).is(uneditable) && $('#edit_panel').is(':visible') && $(event.target).is(":not('#add_button')")) {
 			updateFromFieldsAndHidePanel(clickedElement);
 		}
   })

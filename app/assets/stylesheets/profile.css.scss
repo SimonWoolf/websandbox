@@ -25,6 +25,7 @@ main {
 #edit_panel{
   position: absolute;
   display: none;
+  z-index: 100;
   width: 35rem;
   height: 16rem;
   padding: 10px 0px;
