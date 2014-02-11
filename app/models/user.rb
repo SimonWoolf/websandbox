@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   has_many :masters, through: :slaveships, source: :master
   has_many :slaves, through: :masterships, source: :slave
 
-  def friends
-    masters + slaves
+  def friends(refresh = false)
+    masters(refresh) + slaves(refresh)
   end
 
   def add_friend(newfriend)
