@@ -14,11 +14,6 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  def create
-    @profile.save
-    redirect_to profile_path(@profile)
-  end
-
   def update
     return if not_your_profile? || logged_out_on_existing_profile?
 
@@ -68,7 +63,7 @@ class ProfilesController < ApplicationController
   end
 
   def new_profile
-    Profile.new(html: '<p id="example_element">Here is an editable html element</p>')
+    Profile.create(html: '<p id="example_element">Here is an editable html element</p>')
   end
 
   def authenticate_user!

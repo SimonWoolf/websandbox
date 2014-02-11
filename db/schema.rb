@@ -17,14 +17,14 @@ ActiveRecord::Schema.define(version: 20140210170831) do
   enable_extension "plpgsql"
 
   create_table "friendships", force: true do |t|
-    t.integer  "user1_id"
-    t.integer  "user2_id"
+    t.integer  "master_id"
+    t.integer  "slave_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "friendships", ["user1_id"], name: "index_friendships_on_user1_id", using: :btree
-  add_index "friendships", ["user2_id"], name: "index_friendships_on_user2_id", using: :btree
+  add_index "friendships", ["master_id"], name: "index_friendships_on_master_id", using: :btree
+  add_index "friendships", ["slave_id"], name: "index_friendships_on_slave_id", using: :btree
 
   create_table "profiles", force: true do |t|
     t.datetime "created_at"

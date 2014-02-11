@@ -10,12 +10,17 @@ Rails.application.routes.draw do
       get "versions" => :history, as: 'versions'
       post "versions/:id" => "versions#revert", as: "revert_version"
     end
+    #resources :friendships, only: [:create, :destroy]
+    post "friendship" => "friendships#create"
+    delete "friendship" => "friendships#destroy"
   end
+
 
   resource :profile, only: [:show, :update] do
     get "versions" => :history, as: 'versions'
     post "versions/:id" => "versions#revert", as: "revert_version"
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

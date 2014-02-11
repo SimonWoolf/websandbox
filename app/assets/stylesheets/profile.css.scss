@@ -43,6 +43,8 @@ textarea{
   resize:none;
   margin-bottom: 0px;
   height: 12rem;
+  position: relative;
+  z-index: 101;
 }
 
 main{

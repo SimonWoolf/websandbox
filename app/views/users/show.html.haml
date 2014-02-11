@@ -1,4 +1,19 @@
-%h1 Users#show
-%p Here you can see USER STATS and stuff
+%h1 @user.name
+
+
+.row
+  .medium-6.small-centered.columns
+    %table{width: '100%'}
+      %thead
+        %tr
+          %th Friends
+      %tbody
+        %tr
+          - @user.friends.each do |friend|
+            %td{width: '30%'}= friend.name
+            %td{width: '30%'}= frienduser.email
+            %td{width: '20%'}= link_to 'Friend info', user_page(friend), class: "button verbtns"
+            %td{width: '20%'}= link_to 'Profile', user_profile_path(friend), class: "button verbtns"
+
 
 = link_to 'See this user\'s wall-sandbox-fridge-canvas', user_profile_path(@user)
