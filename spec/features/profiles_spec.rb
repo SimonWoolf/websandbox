@@ -26,7 +26,7 @@ describe 'Editing profiles' do
     end
   end
 
-  context 'logged in as right user' do
+  context 'logged in' do
     before :each do
       login_as(@user1)
     end
@@ -43,10 +43,22 @@ describe 'Editing profiles' do
       expect(page).to have_content "legit update"
     end
 
-    it 'should not be able to edit someone elses page' do
+    it 'should not be able to edit a nonfriends page' do
       page.driver.put user_profile_path(@user2), profile: {html: "vandalism"}
       visit "/users/#{@user2.id}/profile"
       expect(page).not_to have_content "vandalism"
+    end
+
+    context 'friends pages' do
+      before do
+        @user1.add_friend(@user2)
+      end
+
+      it 'should be able to edit a friends page' do
+        page.driver.put user_profile_path(@user2), profile: {html: "friendly edit"}
+        visit "/users/#{@user2.id}/profile"
+        expect(page).to have_content "friendly edit"
+      end
     end
   end
 

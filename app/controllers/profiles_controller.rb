@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    return if not_your_profile? || logged_out_on_existing_profile?
+    return if logged_in_and_on_strangers_profile? || logged_out_on_existing_profile?
 
     if @profile.update(params[:profile].permit(:html))
       if user_signed_in?
@@ -39,9 +39,12 @@ class ProfilesController < ApplicationController
   end
 
   private
+  def logged_in_and_on_strangers_profile?
+    user_signed_in? && params[:user_id] && !yours_and_friends_ids.include?(params[:user_id].to_i)
+  end
 
-  def not_your_profile?
-    user_signed_in? && params[:user_id] && params[:user_id].to_i != current_user.id
+  def yours_and_friends_ids
+    [current_user.id] + current_user.friends.map(&:id)
   end
 
   def logged_out_on_existing_profile?
