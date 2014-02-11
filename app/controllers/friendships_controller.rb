@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
   def create
     newfriend = User.find(params[:user_id])
     current_user.add_friend(newfriend)
-    flash[:notice] = "Added #{newfriend.name} as a friend"
+    flash[:notice] = "Added #{newfriend.name} as a friend. Note: they can now edit your profile."
     redirect_to users_path
   end
 
