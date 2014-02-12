@@ -29,6 +29,15 @@
       .small-12.columns
         %h5
           %small enter to preview, shift+enter to insert newline
-
+    %a#tag_helpers_button 
+      %b +
+    #tag_helpers_div
+      %ul#tag_helpers(list-style='none')
+        %li
+          %a(href="#" data-text="<h1></h1>")="<h1>"
+        %li
+          %a(href="#" data-text="<a href='#'></a>")="<a>"
+        %li
+          %a(href="#" data-text="<img src='#'>")="<img>"
 .profile_content.uneditable#uneditable
   = @profile.html.html_safe

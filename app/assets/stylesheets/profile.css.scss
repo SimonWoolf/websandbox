@@ -50,3 +50,23 @@ textarea{
 main{
   height: 635px;
 }
+
+#tag_helpers{
+  list-style-type: none;
+}
+
+#tag_helpers_div{
+  position: relative;
+  width: 75px;
+  top: -239px;
+  left: 558px;
+  background-color: white;
+  display: none;
+}
+
+#tag_helpers_button{
+  position: relative;
+  top: -247px;
+  left: 538px;
+  color: #FFF;
+}

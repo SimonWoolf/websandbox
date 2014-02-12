@@ -41,6 +41,20 @@ $(function() {
 
   $('.profile_content *').draggable({ disabled: true });
 
+  $('#tag_helpers_button').on('click',function(e){
+    if($(this).children().html()=="+"){
+      $(this).html("<b>-</b>")
+      $('#tag_helpers_div').show("slide", { direction: "left" }, 400);
+    }else{
+      $(this).html("<b>+</b>")
+      $('#tag_helpers_div').hide("slide", { direction: "left" }, 400);
+    }
+  })
+
+  $('#tag_helpers_div a').on('click', function(){
+    $('#edit_field_html').val($(this).attr('data-text'))
+  })
+
   $('#edit_button').on('click', function(){
     $('#grid-background').fadeToggle('slow');
     $('.profile_content').toggleClass('uneditable')
@@ -75,7 +89,7 @@ $(function() {
   });
 
   $('.profile_content').on('click', editable, function(event){
-    console.log(event.target.outerHTML);
+    event.preventDefault()
     $('#edit_panel').show();
     $('#edit_panel').css({'left': event.target.clientLeft + 15 + 'px',
                           'top': event.target.clientHeight + event.target.offsetTop + 'px'});
