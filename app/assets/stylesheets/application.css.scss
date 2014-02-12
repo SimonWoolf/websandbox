@@ -21,10 +21,12 @@ td .verbtns, #versioning > .verbtns {
 }
 
 #versioning {
-  background-color: #CCCCCC;
-  text-align: center;
-  width: 100%;
+  background-color: rgb(57, 56, 50);
   margin: 0 auto;
+  text-align: center;
+  /*compensation for 12-col padding on main:*/
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
 }
 
 #profilelink {

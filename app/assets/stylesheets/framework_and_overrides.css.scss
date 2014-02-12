@@ -1,17 +1,38 @@
 //Overrides to foundation defaults (need to be before import):
 $body-font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
+$body-bg: #fff !default;
+$topbar-link-font-size: rem-calc(15);
+$topbar-title-font-size: rem-calc(15);
+
+// light topbar
+$topbar-bg: rgb(229, 229, 229);
+$topbar-dropdown-bg: #CCC;
+$topbar-dropdown-link-color: #000;
+$topbar-dropdown-link-bg: #BBB;
+$topbar-dropdown-toggle-color: #000;
+$topbar-link-color: #000;
+$topbar-link-color-hover: #000;
+$topbar-link-color-active: #000;
+$topbar-link-color-active-hover: #000;
+$topbar-link-hover-lightness: +10%; // lighten by 10%
+$topbar-link-bg-hover: #BBB;
+$topbar-dropdown-label-color: #AAA;
+$topbar-menu-link-color: #000;
+$topbar-menu-icon-color: #000;
+$topbar-menu-link-color-toggled: #888;
+$topbar-menu-icon-color-toggled: #888;
 
 // import the CSS framework
 @import "foundation";
 
 // override for the 'Home' navigation link
 .top-bar .name {
-  font-size: rem-calc(13);
   line-height: 45px; }
 .top-bar .name a {
   font-weight: normal;
-  color: white;
+  color: black;
   padding: 0 15px; }
+
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create mixins using Foundation classes
@@ -43,7 +64,6 @@ $body-font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial,
 // to make views framework-neutral
 main {
   @include twelve-columns;
-  background-color: #eee;
   }
 section {
   @extend .row;
