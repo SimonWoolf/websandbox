@@ -17,8 +17,12 @@ $(document).ready ->
       type: "PUT",
       url: $(location).attr('pathname'),
       data: {profile: {html: $('.profile_content').html().trim()}},
-      success: -> show_flash("Save successful", "notice")
+      success: ->
+        show_flash("Save successful", "notice")
       complete: (resp) ->
+        console.log(JSON.stringify(resp))
       statusCode:
         401: ->
           $('#signUpModal').foundation('reveal', 'open')
+        403: ->
+          show_flash("You are on a stranger's profile. You need to be their friend before you can edit their profile.", "alert")

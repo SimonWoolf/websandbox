@@ -15,7 +15,10 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    return if logged_in_and_on_strangers_profile? || logged_out_on_existing_profile?
+    if logged_in_and_on_strangers_profile? || logged_out_on_existing_profile?
+      # catch 403 and show flash in profile.js
+      render nothing: true, status: 403 and return
+    end
 
     if @profile.update(params[:profile].permit(:html))
       if user_signed_in?
