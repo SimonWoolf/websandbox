@@ -31,19 +31,20 @@ main {
   height: 16rem;
   padding: 10px 0px;
   border-radius: 10px;
-  background: image-url('grid15.png');
-  background-color: #226;
-  box-shadow: inset 0 0 5rem black;
+  background-color: #555;
+  box-shadow: inset 0 0 4rem black;
   label, h5 small {
     color: white;
     text-shadow: 0px 0px 6px black;
   }
 }
 
-textarea{
+#edit_panel textarea{
   resize:none;
   margin-bottom: 0px;
   height: 12rem;
   position: relative;
   z-index: 101;
+  background: image-url('grid15.png');
+  background-color: #f7f7f7;
 }
