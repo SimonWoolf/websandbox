@@ -1,4 +1,4 @@
-%h1 @user.name
+%h1= @user.name
 
 
 .row
@@ -16,4 +16,4 @@
             %td{width: '20%'}= link_to 'Profile', user_profile_path(friend), class: "button verbtns"
 
 
-= link_to 'See this user\'s wall-sandbox-fridge-canvas', user_profile_path(@user)
+= link_to 'See this user\'s profile', user_profile_path(@user)
