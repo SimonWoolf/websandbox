@@ -1,6 +1,8 @@
 //Overrides to foundation defaults (need to be before import):
 $body-font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
 $body-bg: #fff !default;
+$topbar-link-font-size: rem-calc(15);
+$topbar-title-font-size: rem-calc(15);
 
 // light topbar
 $topbar-bg: rgb(229, 229, 229);
@@ -25,7 +27,6 @@ $topbar-menu-icon-color-toggled: #888;
 
 // override for the 'Home' navigation link
 .top-bar .name {
-  font-size: rem-calc(13);
   line-height: 45px; }
 .top-bar .name a {
   font-weight: normal;
