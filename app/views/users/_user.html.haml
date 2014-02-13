@@ -2,7 +2,7 @@
   %td{width: '25%'}= user.name
   %td{width: '35%'}= user.email
   %td{width: '15%'}= link_to 'User page', user, class: "button verbtns"
-  %td{width: '10%'}= link_to 'Profile', user_profile_path(user), class: "button verbtns"
+  %td{width: '10%'}= link_to 'Sandbox', user_profile_path(user), class: "button verbtns"
   - if user_signed_in? && user != current_user
     - if current_user.friends.include? user
       %td{width: '15%'}= button_to 'Remove friend', user_friendship_path(user), method: :delete, class: "alert button verbtns"

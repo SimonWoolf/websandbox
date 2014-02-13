@@ -12,7 +12,7 @@
 
 - if viewing_someone_elses_profile?
   .secondary.button#profilelink
-    = link_to "Viewing #{@profile.user.name}'s profile", user_path(@profile.user)
+    = link_to "Viewing #{@profile.user.name}'s sandbox", user_path(@profile.user)
 
 #control_content.uneditable
   .panel#edit_panel

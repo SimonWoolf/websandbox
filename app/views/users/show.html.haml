@@ -13,7 +13,7 @@
             %td{width: '30%'}= friend.name
             %td{width: '30%'}= frienduser.email
             %td{width: '20%'}= link_to 'Friend info', user_page(friend), class: "button verbtns"
-            %td{width: '20%'}= link_to 'Profile', user_profile_path(friend), class: "button verbtns"
+            %td{width: '20%'}= link_to 'Sandbox', user_profile_path(friend), class: "button verbtns"
 
 
-= link_to 'See this user\'s profile', user_profile_path(@user)
+= link_to 'See this user\'s sandbox', user_profile_path(@user)

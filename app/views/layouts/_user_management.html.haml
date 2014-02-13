@@ -1,6 +1,6 @@
 - if user_signed_in?
   %li= link_to('My user stats', user_path(current_user))
-  %li= link_to('My profile', profile_path)
+  %li= link_to('My sandbox', profile_path)
   %li= link_to('Edit registration', edit_user_registration_path)
   %li= link_to('Logout', destroy_user_session_path, :method => :delete)
 - else
